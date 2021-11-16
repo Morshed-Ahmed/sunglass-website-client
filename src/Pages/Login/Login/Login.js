@@ -1,0 +1,79 @@
+import { Alert, AlertTitle, Button, CircularProgress, Container, Grid, TextField, Typography } from '@mui/material';
+import React, { useState } from 'react';
+import { NavLink, useLocation, useHistory } from 'react-router-dom';
+import useAuth from '../../../Hooks/useAuth';
+
+
+const Login = () => {
+
+
+
+
+    const [loginData, setLoginData] = useState({})
+    const { user, loginUser, isLoading, authError, signInWithGoogle } = useAuth()
+
+    const location = useLocation()
+    const history = useHistory()
+    const handleOnChange = e => {
+        const field = e.target.name;
+        const value = e.target.value;
+        const newLoginData = { ...loginData }
+        newLoginData[field] = value;
+        setLoginData(newLoginData)
+    }
+    const handleLogInSubmit = e => {
+        loginUser(loginData.email, loginData.password, location, history)
+        e.preventDefault()
+    }
+
+    const handleGoogleSignIn = () => {
+        signInWithGoogle(location, history)
+    }
+
+    return (
+        <Container>
+            <Grid container spacing={2}>
+                <Grid item xs={8}>
+                    <Typography variant="h5">Login</Typography>
+
+                    <form onSubmit={handleLogInSubmit}>
+                        <TextField
+                            id="outlined-basic"
+                            label="Your Email"
+                            name="email"
+                            onBlur={handleOnChange}
+                            variant="outlined" /> <br /> <br />
+                        <TextField
+                            id="outlined-basic"
+                            label="Your Password"
+                            type="password"
+                            name="password"
+                            onBlur={handleOnChange}
+                            variant="outlined" /> <br />
+                        <Button variant="contained" type="submit">Login</Button> <br />
+                        <NavLink to="/register">
+                            New User? Please Register
+                        </NavLink> <br /> <br />
+
+                        {isLoading && <CircularProgress color="inherit" />}
+                        {user?.email && <Alert severity="success">
+                            <AlertTitle>Success</AlertTitle>
+                            User Login successful — <strong>check it out!</strong>
+                        </Alert>}
+                        {authError && <Alert severity="error">
+                            <AlertTitle>Error</AlertTitle>
+                            This is an error alert — <strong>check it out!</strong>
+                        </Alert>}
+
+                    </form>
+                    <Button onClick={handleGoogleSignIn} variant="contained">Google Sign In</Button>
+                </Grid>
+                <Grid item xs={8}>
+
+                </Grid>
+
+            </Grid>
+        </Container>
+    );
+};
+export default Login;
