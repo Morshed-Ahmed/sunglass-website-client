@@ -8,7 +8,7 @@ const Banner = () => {
     return (
         <Box className="banner-style" sx={{ flexGrow: 1 }}>
             <Grid container spacing={2}>
-                <Grid item xs={4}>
+                <Grid sx={{ marginTop: 12 }} item xs={4}>
                     <Typography gutterBottom variant="h5" component="div">
                         FLAT
                     </Typography>
@@ -18,10 +18,6 @@ const Banner = () => {
                     <Typography gutterBottom variant="h5" component="div">
                         ON SUNGLASSES
                     </Typography>
-                    {/* <Button size="small" color="primary">
-                        Shop Now
-                    </Button> */}
-                    <Button variant="outlined">Shop Now</Button>
                 </Grid>
                 <Grid item xs={8}>
 

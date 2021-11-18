@@ -33,9 +33,9 @@ function App() {
             <Route path="/ordernow/:orderId">
               <OrderNow></OrderNow>
             </Route>
-            <PrivateRoute path="/explore">
+            <Route path="/explore">
               <Explore></Explore>
-            </PrivateRoute>
+            </Route>
             <PrivateRoute path="/dashboard">
               <Dashboard></Dashboard>
             </PrivateRoute>

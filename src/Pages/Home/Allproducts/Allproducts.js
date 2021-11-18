@@ -1,17 +1,18 @@
 import { Button, Card, CardActionArea, CardActions, CardContent, CardMedia, Grid, Typography } from '@mui/material';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import './Allproducts.css'
 
 const Allproducts = (props) => {
-    const { id, name, description, price, img } = props.pd;
+    const { _id, name, description, price, image } = props.pd;
     return (
-        <Grid item xs={4} sm={4} md={4} >
+        <Grid sx={{ marginTop: 5 }} className="allproducts" item xs={4} sm={4} md={4} >
             <Card sx={{ maxWidth: 345 }}>
                 <CardActionArea>
                     <CardMedia
                         component="img"
                         height="140"
-                        image={img}
+                        image={image}
                         alt="green iguana"
                     />
                     <CardContent>
@@ -27,12 +28,10 @@ const Allproducts = (props) => {
                     </CardContent>
                 </CardActionArea>
                 <CardActions>
-                    <Link to={`/ordernow/${id}`}>
+                    <Link className="buttons" to={`/ordernow/${_id}`}>
                         <Button variant="contained">Add To Card</Button>
                     </Link>
-                    {/* <Button size="small" color="primary">
-                        Share
-                    </Button> */}
+
                 </CardActions>
             </Card>
         </Grid>

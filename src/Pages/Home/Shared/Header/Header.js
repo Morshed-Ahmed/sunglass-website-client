@@ -1,4 +1,5 @@
 import React from 'react';
+import './Header.css'
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -13,47 +14,53 @@ import useAuth from '../../../../Hooks/useAuth';
 const Header = () => {
     const { user, logout } = useAuth()
     return (
-        <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static">
-                <Toolbar>
-                    <IconButton
-                        size="large"
-                        edge="start"
-                        color="inherit"
-                        aria-label="menu"
-                        sx={{ mr: 2 }}
-                    >
-                        <MenuIcon />
-                    </IconButton>
-                    <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                        News
-                    </Typography>
+        <div className="header-style">
+            <Box sx={{ flexGrow: 1 }}>
+                <AppBar position="static">
+                    <Toolbar>
+                        <IconButton
+                            size="large"
+                            edge="start"
+                            color="inherit"
+                            aria-label="menu"
+                            sx={{ mr: 2 }}
+                        >
+                            <MenuIcon />
+                        </IconButton>
+                        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                            Lunettes
+                        </Typography>
 
-                    <NavLink to="/explore">
-                        <Button color="inherit">Explore</Button>
-                    </NavLink>
+                        <NavLink className="button-style" to="/home">
+                            <Button color="inherit">Home</Button>
+                        </NavLink>
+                        <NavLink className="button-style" to="/explore">
+                            <Button sx={{ color: 'black' }} color="inherit">Explore</Button>
+                        </NavLink>
 
 
-                    {
-                        user?.email ?
-                            <Box>
-                                <NavLink to="/dashboard">
-                                    <Button color="inherit">Dashboard</Button>
+                        {
+                            user?.email ?
+                                <Box>
+                                    <NavLink className="button-style" to="/dashboard">
+                                        <Button color="inherit">Dashboard</Button>
+                                    </NavLink>
+
+                                    <Button sx={{ color: 'black' }} onClick={logout} color="inherit">Logout</Button>
+                                </Box>
+
+                                :
+                                <NavLink to="/login">
+                                    <Button color="inherit">Login</Button>
                                 </NavLink>
-
-                                <Button onClick={logout} color="inherit">Logout</Button>
-                            </Box>
-
-                            :
-                            <NavLink to="/login">
-                                <Button color="inherit">Login</Button>
-                            </NavLink>
-                    }
+                        }
 
 
-                </Toolbar>
-            </AppBar>
-        </Box>
+                    </Toolbar>
+                </AppBar>
+
+            </Box>
+        </div>
     );
 };
 

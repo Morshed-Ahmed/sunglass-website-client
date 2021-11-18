@@ -2,7 +2,8 @@ import { Alert, AlertTitle, Button, CircularProgress, Container, Grid, TextField
 import React, { useState } from 'react';
 import { NavLink, useLocation, useHistory } from 'react-router-dom';
 import useAuth from '../../../Hooks/useAuth';
-
+import Footer from '../../Home/Footer/Footer';
+import Header from '../../Home/Shared/Header/Header';
 
 const Login = () => {
 
@@ -31,49 +32,53 @@ const Login = () => {
     }
 
     return (
-        <Container>
-            <Grid container spacing={2}>
-                <Grid item xs={8}>
-                    <Typography variant="h5">Login</Typography>
 
-                    <form onSubmit={handleLogInSubmit}>
-                        <TextField
-                            id="outlined-basic"
-                            label="Your Email"
-                            name="email"
-                            onBlur={handleOnChange}
-                            variant="outlined" /> <br /> <br />
-                        <TextField
-                            id="outlined-basic"
-                            label="Your Password"
-                            type="password"
-                            name="password"
-                            onBlur={handleOnChange}
-                            variant="outlined" /> <br />
-                        <Button variant="contained" type="submit">Login</Button> <br />
-                        <NavLink to="/register">
-                            New User? Please Register
-                        </NavLink> <br /> <br />
+        <div>
+            <Header></Header>
+            <Container>
+                <Grid container spacing={2}>
+                    <Grid item xs={8}>
+                        <Typography variant="h5">Login</Typography>
 
-                        {isLoading && <CircularProgress color="inherit" />}
-                        {user?.email && <Alert severity="success">
-                            <AlertTitle>Success</AlertTitle>
-                            User Login successful — <strong>check it out!</strong>
-                        </Alert>}
-                        {authError && <Alert severity="error">
-                            <AlertTitle>Error</AlertTitle>
-                            This is an error alert — <strong>check it out!</strong>
-                        </Alert>}
+                        <form onSubmit={handleLogInSubmit}>
+                            <TextField
+                                id="outlined-basic"
+                                label="Your Email"
+                                name="email"
+                                onBlur={handleOnChange}
+                                variant="outlined" /> <br /> <br />
+                            <TextField
+                                id="outlined-basic"
+                                label="Your Password"
+                                type="password"
+                                name="password"
+                                onBlur={handleOnChange}
+                                variant="outlined" /> <br /> <br />
+                            <Button variant="contained" type="submit">Login</Button> <br />
+                            <NavLink to="/register">
+                                New User? Please Register
+                            </NavLink> <br /> <br />
 
-                    </form>
-                    <Button onClick={handleGoogleSignIn} variant="contained">Google Sign In</Button>
+                            {isLoading && <CircularProgress color="inherit" />}
+                            {user?.email && <Alert severity="success">
+                                <AlertTitle>Success</AlertTitle>
+                                User Login successful — <strong>check it out!</strong>
+                            </Alert>}
+                            {authError && <Alert severity="error">
+                                <AlertTitle>Error</AlertTitle>
+                                This is an error alert — <strong>check it out!</strong>
+                            </Alert>}
+
+                        </form>
+                        <Button onClick={handleGoogleSignIn} variant="contained">Google Sign In</Button>
+                    </Grid>
+
+
                 </Grid>
-                <Grid item xs={8}>
+            </Container>
+            <Footer></Footer>
 
-                </Grid>
-
-            </Grid>
-        </Container>
+        </div>
     );
 };
 export default Login;

@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 const MakeAdmin = () => {
     const [email, setEmail] = useState('')
     const [makeAdmin, setMakeAdmin] = useState(false)
-    /* const [success, setSuccess] = useState(false) */
+
 
     const handleOnBlur = e => {
         setEmail(e.target.value)
@@ -26,11 +26,7 @@ const MakeAdmin = () => {
 
                     setMakeAdmin(true)
                 }
-                /* if (data.modifiedCount) {
-                    console.log(data)
-                    setEmail('')
-                    setSuccess(true)
-                } */
+
 
             })
 
@@ -47,13 +43,9 @@ const MakeAdmin = () => {
                     label="Email"
                     type="email"
                     onBlur={handleOnBlur}
-                    variant="outlined" />
+                    variant="outlined" /> <br /> <br />
                 <Button type="submit" variant="contained">Make Admin</Button>
             </form>
-            {/* {
-                makeAdmin && <Alert severity="success">made admin successful</Alert>
-            } */}
-
             {makeAdmin?.email && <Alert severity="success">
                 <AlertTitle>Success</AlertTitle>
                 Made Admin successful — <strong>check it out!</strong>

@@ -1,0 +1,13 @@
+.review-header{
+    margin: 35px 30px;
+    
+}
+
+.review-img{
+    width: 50px;
+    height: auto;
+}
+
+.style{
+    display: flex;
+}

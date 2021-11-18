@@ -1,4 +1,5 @@
 import * as React from 'react';
+import './Dashboard.css'
 import PropTypes from 'prop-types';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -6,12 +7,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
 import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import MailIcon from '@mui/icons-material/Mail';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
@@ -21,18 +17,21 @@ import {
     BrowserRouter as Router,
     Switch,
     Route,
-    Link,
-    useParams,
     useRouteMatch
 } from "react-router-dom";
 import DashboardHome from '../DashboardHome/DashboardHome';
 import MakeAdmin from '../MakeAdmin/MakeAdmin';
 import AddProduct from '../AddProduct/AddProduct'
 import useAuth from '../../../Hooks/useAuth';
+import Reviews from '../Reviews/Reviews';
+import PayNow from '../PayNow/PayNow';
 
 const drawerWidth = 240;
 
 function Dashboard(props) {
+
+    const { user, logout } = useAuth()
+
     const { window } = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -48,45 +47,37 @@ function Dashboard(props) {
         <div>
             <Toolbar />
             <Divider />
-            <List>
-                <NavLink to="/home">
+            <List >
+                <NavLink className="button-style" to="/home">
                     <Button color="inherit">Home</Button>
                 </NavLink> <br />
-                <NavLink to={`${url}`}>
+                <NavLink className="button-style" to={`${url}`}>
                     <Button color="inherit">My Order</Button>
+                </NavLink> <br />
+                <NavLink className="button-style" to={`${url}/reviews`}>
+                    <Button color="inherit">Reviews</Button>
+                </NavLink> <br />
+                <NavLink className="button-style" to={`${url}/payNow`}>
+                    <Button color="inherit">Pay Now</Button>
                 </NavLink> <br />
                 {
                     admin && <Box>
-                        <NavLink to={`${url}/makeAdmin`}>
+                        <NavLink className="button-style" to={`${url}/makeAdmin`}>
                             <Button color="inherit">Make Admin</Button>
                         </NavLink> <br />
-                        <NavLink to={`${url}/addProduct`}>
+                        <NavLink className="button-style" to={`${url}/addProduct`}>
                             <Button color="inherit">Add Product</Button>
-                        </NavLink>
+                        </NavLink> <br />
+
+                        {user.email &&
+                            <Button variant="outlined" sx={{ color: 'black' }} onClick={logout} color="inherit">Logout</Button>}
                     </Box>
                 }
 
-                {/* {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                    <ListItem button key={text}>
-                        <ListItemIcon>
-                            {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                        </ListItemIcon>
-                        <ListItemText primary={text} />
 
-                    </ListItem>
-                ))} */}
             </List>
             <Divider />
-            {/* <List>
-                {['All mail', 'Trash', 'Spam'].map((text, index) => (
-                    <ListItem button key={text}>
-                        <ListItemIcon>
-                            {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                        </ListItemIcon>
-                        <ListItemText primary={text} />
-                    </ListItem>
-                ))}
-            </List> */}
+
         </div>
     );
 
@@ -102,9 +93,10 @@ function Dashboard(props) {
                     ml: { sm: `${drawerWidth}px` },
                 }}
             >
-                <Toolbar>
+                <Toolbar className="dashboard">
                     <IconButton
                         color="inherit"
+
                         aria-label="open drawer"
                         edge="start"
                         onClick={handleDrawerToggle}
@@ -129,7 +121,7 @@ function Dashboard(props) {
                     open={mobileOpen}
                     onClose={handleDrawerToggle}
                     ModalProps={{
-                        keepMounted: true, // Better open performance on mobile.
+                        keepMounted: true,
                     }}
                     sx={{
                         display: { xs: 'block', sm: 'none' },
@@ -158,6 +150,12 @@ function Dashboard(props) {
                     <Route exact path={path}>
                         <DashboardHome></DashboardHome>
                     </Route>
+                    <Route path={`${path}/reviews`}>
+                        <Reviews></Reviews>
+                    </Route>
+                    <Route path={`${path}/payNow`}>
+                        <PayNow></PayNow>
+                    </Route>
                     <Route path={`${path}/makeAdmin`}>
                         <MakeAdmin></MakeAdmin>
                     </Route>
@@ -172,10 +170,7 @@ function Dashboard(props) {
 }
 
 Dashboard.propTypes = {
-    /**
-     * Injected by the documentation to work in an iframe.
-     * You won't need it on your project.
-     */
+
     window: PropTypes.func,
 };
 
