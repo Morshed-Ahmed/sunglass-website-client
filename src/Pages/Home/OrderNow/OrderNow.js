@@ -12,7 +12,7 @@ const OrderNow = () => {
     const [product, setProduct] = useState({})
 
     useEffect(() => {
-        fetch(`http://localhost:5000/singleProducts/${orderId}`)
+        fetch(`https://fathomless-thicket-76558.herokuapp.com/singleProducts/${orderId}`)
             .then(res => res.json())
             .then(data => setProduct(data))
     }, [])
@@ -27,7 +27,7 @@ const OrderNow = () => {
         data.email = email
 
 
-        fetch('http://localhost:5000/orders', {
+        fetch('https://fathomless-thicket-76558.herokuapp.com/orders', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
