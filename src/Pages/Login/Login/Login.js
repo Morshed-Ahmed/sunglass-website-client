@@ -35,11 +35,10 @@ const Login = () => {
 
         <div>
             <Header></Header>
-            <Container>
+            <Container sx={{ marginBottom: 7, marginTop: 7 }}>
                 <Grid container spacing={2}>
-                    <Grid item xs={8}>
-                        <Typography variant="h5">Login</Typography>
-
+                    <Grid item sx={{ marginLeft: 50 }}>
+                        <Typography variant="h5">Please Login</Typography>
                         <form onSubmit={handleLogInSubmit}>
                             <TextField
                                 id="outlined-basic"

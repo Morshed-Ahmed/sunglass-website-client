@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 
 const Reviews = () => {
 
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = data => {
         fetch("https://fathomless-thicket-76558.herokuapp.com/reviews", {
             method: "POST",
